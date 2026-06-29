@@ -1,6 +1,6 @@
-import React, {forwardRef, useContext, FunctionComponentElement} from 'react';
+import React, { forwardRef, useContext, FunctionComponentElement, JSX } from 'react';
 import PaystackProvider from './paystack-provider';
-import {PaystackProps} from './types';
+import { PaystackProps } from './types';
 import PaystackContext from './paystack-context';
 
 interface PaystackConsumerProps extends PaystackProps {
@@ -16,16 +16,16 @@ const PaystackConsumerChild = ({
   children: any;
   ref: any;
 }): FunctionComponentElement<any> => {
-  const {config, initializePayment, onSuccess, onClose} = useContext(PaystackContext);
+  const { config, initializePayment, onSuccess, onClose } = useContext(PaystackContext);
 
-  const completeInitializePayment = (): void => initializePayment({config, onSuccess, onClose});
-  return children({initializePayment: completeInitializePayment, ref});
+  const completeInitializePayment = (): void => initializePayment({ config, onSuccess, onClose });
+  return children({ initializePayment: completeInitializePayment, ref });
 };
 
 // eslint-disable-next-line react/display-name
 const PaystackConsumer = forwardRef(
   (
-    {children, onSuccess: paraSuccess, onClose: paraClose, ...others}: PaystackConsumerProps,
+    { children, onSuccess: paraSuccess, onClose: paraClose, ...others }: PaystackConsumerProps,
     ref: any,
   ): JSX.Element => {
     const onSuccess = paraSuccess ? paraSuccess : (): any => null;

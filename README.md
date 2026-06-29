@@ -1,261 +1,269 @@
-# react-paystack
+# React Paystack
 
-This is a react library for implementing paystack payment gateway
+A modern React library for integrating the Paystack payment gateway into your React applications.
 
-## Demo
+This package supports **React 18** and **React 19** and is built with modern React and TypeScript.
 
-![Demo](React_App_01.png?raw=true "Demo Image")
+## Features
 
-## Get Started
+- ⚡ Simple Paystack integration
+- ⚛️ React 18 & React 19 support
+- 🪝 Hook-based API
+- 🔘 Ready-to-use payment button
+- 🧩 Context consumer API
+- 📦 TypeScript support
+- 🚀 Lightweight with zero unnecessary dependencies
 
-This React library provides a wrapper to add Paystack Payments to your React application
+---
 
-### Install
+# Installation
 
-```sh
-npm install react-paystack --save
+Using npm:
+
+```bash
+npm install react-paystack
 ```
 
-or with `yarn`
+Using Yarn:
 
-```sh
+```bash
 yarn add react-paystack
 ```
 
-### Usage
+Using pnpm:
 
-This library can be implemented into any react application in 3 different ways:
-1. By using hooks provided by the library
-2. By using a button provided by the library
-3. By using a context consumer provided by the library
-
-Note that all 3 implementations produce the same results.
-
-
-### 1. Using the paystack hook
-```javascript
-  import React from 'react';
-  import logo from './logo.svg';
-  import { usePaystackPayment } from 'react-paystack';
-  import './App.css';
-  
-  const config = {
-      reference: (new Date()).getTime().toString(),
-      email: "user@example.com",
-      amount: 20000, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-      publicKey: 'pk_test_dsdfghuytfd2345678gvxxxxxxxxxx',
-  };
-  
-  // you can call this function anything
-  const onSuccess = (reference) => {
-    // Implementation for whatever you want to do with reference and after success call.
-    console.log(reference);
-  };
-
-  // you can call this function anything
-  const onClose = () => {
-    // implementation for  whatever you want to do when the Paystack dialog closed.
-    console.log('closed')
-  }
-
-  const PaystackHookExample = () => {
-      const initializePayment = usePaystackPayment(config);
-      return (
-        <div>
-            <button onClick={() => {
-                initializePayment(onSuccess, onClose)
-            }}>Paystack Hooks Implementation</button>
-        </div>
-      );
-  };
-  
-  function App() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-        <PaystackHookExample />
-      </div>
-    );
-  }
-  
-  export default App;
+```bash
+pnpm add react-paystack
 ```
 
+---
 
-### 2. Using the paystack button
+# Quick Start
 
-``` javascript 
-  import React from 'react';
-  import logo from './logo.svg';
-  import { PaystackButton } from 'react-paystack';
-  import './App.css';
-  
-  const config = {
-    reference: (new Date()).getTime().toString(),
-    email: "user@example.com",
-    amount: 20000, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-    publicKey: 'pk_test_dsdfghuytfd2345678gvxxxxxxxxxx',
-  };
-  
-  function App() {
-    // you can call this function anything
-    const handlePaystackSuccessAction = (reference) => {
-      // Implementation for whatever you want to do with reference and after success call.
-      console.log(reference);
-    };
+All examples below use the same configuration object.
 
-    // you can call this function anything
-    const handlePaystackCloseAction = () => {
-      // implementation for  whatever you want to do when the Paystack dialog closed.
-      console.log('closed')
-    }
-
-    const componentProps = {
-        ...config,
-        text: 'Paystack Button Implementation',
-        onSuccess: (reference) => handlePaystackSuccessAction(reference),
-        onClose: handlePaystackCloseAction,
-    };
-
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-        <PaystackButton {...componentProps} />
-      </div>
-    );
-  }
-  
-  export default App;
+```tsx
+const config = {
+	reference: new Date().getTime().toString(),
+	email: "user@example.com",
+	amount: 20000, // Amount in the lowest currency unit (20000 Kobo = ₦200)
+	publicKey: "pk_test_xxxxxxxxxxxxxxxxxxxxx",
+};
 ```
 
-### 3. using the Paystack consumer
-``` Javascript
-import React from 'react';
-import logo from './logo.svg';
-import { PaystackConsumer } from 'react-paystack';
-import './App.css';
-  
-  const config = {
-      reference: (new Date()).getTime().toString(),
-      email: "user@example.com",
-      amount: 20000, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-      publicKey: 'pk_test_dsdfghuytfd2345678gvxxxxxxxxxx',
-  };
-  
-  // you can call this function anything
-  const handleSuccess = (reference) => {
-    // Implementation for whatever you want to do with reference and after success call.
-    console.log(reference);
-  };
+---
 
-  // you can call this function anything
-  const handleClose = () => {
-    // implementation for  whatever you want to do when the Paystack dialog closed.
-    console.log('closed')
-  }
+# Usage
 
-  function App() {
-      const componentProps = {
-          ...config,
-          text: 'Paystack Button Implementation',
-          onSuccess: (reference) => handleSuccess(reference),
-          onClose: handleClose
-      };
-  
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-        <PaystackConsumer {...componentProps} >
-          {({initializePayment}) => <button onClick={() => initializePayment(handleSuccess, handleClose)}>Paystack Consumer Implementation</button>}
-        </PaystackConsumer>
-      </div>
-    );
-  }
-  
-  export default App;
+This library can be used in three different ways:
+
+1. `usePaystackPayment` Hook
+2. `PaystackButton` Component
+3. `PaystackConsumer` Component
+
+All three approaches provide the same payment experience.
+
+---
+
+# 1. Using the Hook
+
+```tsx
+import { usePaystackPayment } from "react-paystack";
+
+const config = {
+	reference: new Date().getTime().toString(),
+	email: "user@example.com",
+	amount: 20000,
+	publicKey: "pk_test_xxxxxxxxxxxxxxxxxxxxx",
+};
+
+export default function App() {
+	const initializePayment = usePaystackPayment(config);
+
+	const onSuccess = (reference: any) => {
+		console.log(reference);
+	};
+
+	const onClose = () => {
+		console.log("Payment cancelled");
+	};
+
+	return (
+		<button onClick={() => initializePayment(onSuccess, onClose)}>
+			Pay Now
+		</button>
+	);
+}
 ```
 
-### Sending Metadata with Transaction
-If you want to send extra metadata e.g. Transaction description, user that made the transaction. Edit your config like so:
+---
 
-```ts
-    const config = {
-       // Your required fields
-          metadata: {
-            custom_fields: [
-                {
-                    display_name: 'description',
-                    variable_name: 'description',
-                    value: 'Funding Wallet'
-                }
-                // To pass extra metadata, add an object with the same fields as above
-            ]
-        }
-    };
+# 2. Using the Button Component
+
+```tsx
+import { PaystackButton } from "react-paystack";
+
+const componentProps = {
+	reference: new Date().getTime().toString(),
+	email: "user@example.com",
+	amount: 20000,
+	publicKey: "pk_test_xxxxxxxxxxxxxxxxxxxxx",
+
+	text: "Pay Now",
+
+	onSuccess(reference: any) {
+		console.log(reference);
+	},
+
+	onClose() {
+		console.log("Payment cancelled");
+	},
+};
+
+export default function App() {
+	return <PaystackButton {...componentProps} />;
+}
 ```
 
-Please checkout [Paystack Documentation](https://developers.paystack.co/docs/paystack-inline) for other available options you can add to the tag
+---
 
-## Deployment
+# 3. Using the Consumer Component
 
-REMEMBER TO CHANGE THE KEY WHEN DEPLOYING ON A LIVE/PRODUCTION SYSTEM
+```tsx
+import { PaystackConsumer } from "react-paystack";
 
-## Contributing
+const componentProps = {
+	reference: new Date().getTime().toString(),
+	email: "user@example.com",
+	amount: 20000,
+	publicKey: "pk_test_xxxxxxxxxxxxxxxxxxxxx",
 
-1. Fork it!
-2. Create your feature branch: `git checkout -b feature-name`
-3. Commit your changes: `git commit -am 'Some commit message'`
-4. Push to the branch: `git push origin feature-name`
-5. Submit a pull request 😉😉
+	onSuccess(reference: any) {
+		console.log(reference);
+	},
 
-## How can I thank you?
+	onClose() {
+		console.log("Payment cancelled");
+	},
+};
 
-Why not star the github repo? I'd love the attention! Why not share the link for this repository on Twitter or Any Social Media? Spread the word!
+export default function App() {
+	return (
+		<PaystackConsumer {...componentProps}>
+			{({ initializePayment }) => (
+				<button onClick={() => initializePayment()}>Pay Now</button>
+			)}
+		</PaystackConsumer>
+	);
+}
+```
 
-Don't forget to [follow me on twitter](https://twitter.com/iamraphson)!
+---
 
-Thanks!
-Olusegun Ayeni.
+# Transaction Metadata
 
-## License
+Additional transaction metadata can be sent using the `metadata` property.
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+```tsx
+const config = {
+	reference: new Date().getTime().toString(),
+	email: "user@example.com",
+	amount: 20000,
+	publicKey: "pk_test_xxxxxxxxxxxxxxxxxxxxx",
+
+	metadata: {
+		custom_fields: [
+			{
+				display_name: "Description",
+				variable_name: "description",
+				value: "Funding Wallet",
+			},
+		],
+	},
+};
+```
+
+Refer to the official Paystack documentation for all available metadata options.
+
+---
+
+# Configuration
+
+| Property    | Required | Description                        |
+| ----------- | :------: | ---------------------------------- |
+| `email`     |    ✅    | Customer email address             |
+| `amount`    |    ✅    | Amount in the lowest currency unit |
+| `publicKey` |    ✅    | Your Paystack public key           |
+| `reference` |    ✅    | Unique payment reference           |
+| `currency`  |    ❌    | Currency code                      |
+| `label`     |    ❌    | Label displayed on checkout        |
+| `metadata`  |    ❌    | Additional transaction metadata    |
+| `channels`  |    ❌    | Allowed payment channels           |
+| `split`     |    ❌    | Split payment configuration        |
+
+---
+
+# Testing
+
+Use your **Paystack Test Public Key** while developing.
+
+Before deploying your application, replace it with your **Live Public Key**.
+
+---
+
+# Documentation
+
+For more information about Paystack Inline, visit:
+
+https://paystack.com/docs/payments/accept-payments/
+
+---
+
+# Contributing
+
+Contributions are welcome.
+
+1. Fork the repository.
+2. Create a feature branch.
+
+```bash
+git checkout -b feature/my-feature
+```
+
+3. Commit your changes.
+
+```bash
+git commit -m "Add my feature"
+```
+
+4. Push your branch.
+
+```bash
+git push origin feature/my-feature
+```
+
+5. Open a Pull Request.
+
+---
+
+# Roadmap
+
+- React 19 improvements
+- Improved TypeScript typings
+- Better examples
+- Additional customization options
+- More comprehensive tests
+
+---
+
+# Credits
+
+This project is based on the original work by **Ayeni Olusegun**.
+
+---
+
+# License
+
+Licensed under the MIT License.
+
+See the [LICENSE](LICENSE) file for details.

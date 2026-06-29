@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import PaystackContext from './paystack-context';
 import usePaystackPayment from './use-paystack';
-import {callback, PaystackProps} from './types';
+import { callback, PaystackProps } from './types';
 
 interface PaystackProviderProps extends PaystackProps {
   children: JSX.Element;
@@ -18,7 +18,7 @@ const PaystackProvider = ({
   const initializePayment = usePaystackPayment(config);
 
   return (
-    <PaystackContext.Provider value={{config, initializePayment, onSuccess, onClose}}>
+    <PaystackContext.Provider value={{ config, initializePayment, onSuccess, onClose }}>
       {children}
     </PaystackContext.Provider>
   );
