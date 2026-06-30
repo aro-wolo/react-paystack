@@ -1,7 +1,7 @@
 {
-	"name": "react-paystack",
-	"version": "1.0.0",
-	"description": "React components and hooks for integrating Paystack payments.",
+	"name": "@aro-wolo/react-paystack",
+	"version": "1.0.1",
+	"description": "React hooks and components for integrating Paystack payments.",
 	"license": "MIT",
 	"author": "Arowolo Abiodun",
 	"repository": {
@@ -17,10 +17,14 @@
 		"reactjs",
 		"paystack",
 		"payments",
+		"payment",
 		"payment-gateway",
-		"typescript"
+		"typescript",
+		"hooks",
+		"checkout"
 	],
 	"type": "module",
+	"sideEffects": false,
 	"main": "./dist/react-paystack.umd.cjs",
 	"module": "./dist/react-paystack.js",
 	"types": "./dist/index.d.ts",
@@ -39,7 +43,8 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
-		"preview": "vite preview"
+		"lint": "eslint .",
+		"prepublishOnly": "npm run build"
 	},
 	"peerDependencies": {
 		"react": "^18.0.0 || ^19.0.0",
