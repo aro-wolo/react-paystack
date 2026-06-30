@@ -1,33 +1,54 @@
-import { usePaystackPayment } from "react-paystack";
-import "./index.css"
-import "./App.css"
+import { usePaystackPayment, PaystackButton } from "react-paystack";
 
 export default function App() {
-  const initializePayment = usePaystackPayment({
-    email: "customer@example.com",
-    amount: 500000, // ₦5,000 (amount is in kobo)
-    publicKey: "pk_test_xxxxxxxxxxxxxxxxxxxx",
+  const config = {
     reference: `REF-${Date.now()}`,
-  });
+    email: "customer@example.com",
+    amount: 500000,
+    publicKey: "pk_test_xxxxxxxxxxxxxxxxxxxx",
+  };
 
-  const handlePayment = () => {
+  // Hook
+  const initializePayment = usePaystackPayment(config);
+
+  const payWithHook = () => {
     initializePayment({
       onSuccess: (response) => {
-        console.log("Payment successful:", response);
+        console.log("Hook Success", response);
       },
       onClose: () => {
-        console.log("Payment cancelled");
+        console.log("Hook Closed");
       },
     });
   };
 
-  return (
-    <div>
-      <h1>React Paystack Demo</h1>
+  // Component callbacks
+  const componentProps = {
+    ...config,
+    text: "Pay with Component",
+    onSuccess: (response: any) => {
+      console.log("Component Success", response);
+    },
+    onClose: () => {
+      console.log("Component Closed");
+    },
+  };
 
-      <button onClick={handlePayment}>
-        Pay ₦5,000
+  return (
+    <div style={{ padding: 20 }}>
+      <h1>Paystack Test Page</h1>
+
+      <hr />
+
+      <h2>1. usePaystackPayment Hook</h2>
+      <button onClick={payWithHook}>
+        Pay with Hook
       </button>
+
+      <hr />
+
+      <h2>2. PaystackButton Component</h2>
+      <PaystackButton {...componentProps} />
     </div>
   );
 }
