@@ -21,19 +21,19 @@ This package supports **React 18** and **React 19** and is built with modern Rea
 Using npm:
 
 ```bash
-npm install react-paystack
+npm install @aro-wolo/react-paystack
 ```
 
 Using Yarn:
 
 ```bash
-yarn add react-paystack
+yarn add @aro-wolo/react-paystack
 ```
 
 Using pnpm:
 
 ```bash
-pnpm add react-paystack
+pnpm add @aro-wolo/react-paystack
 ```
 
 ---
@@ -68,7 +68,7 @@ All three approaches provide the same payment experience.
 # 1. Using the Hook
 
 ```tsx
-import { usePaystackPayment } from "react-paystack";
+import { usePaystackPayment } from "@aro-wolo/react-paystack";
 
 const config = {
 	reference: new Date().getTime().toString(),
@@ -101,7 +101,7 @@ export default function App() {
 # 2. Using the Button Component
 
 ```tsx
-import { PaystackButton } from "react-paystack";
+import { PaystackButton } from "@aro-wolo/react-paystack";
 
 const componentProps = {
 	reference: new Date().getTime().toString(),
@@ -130,7 +130,7 @@ export default function App() {
 # 3. Using the Consumer Component
 
 ```tsx
-import { PaystackConsumer } from "react-paystack";
+import { PaystackConsumer } from "@aro-wolo/react-paystack";
 
 const componentProps = {
 	reference: new Date().getTime().toString(),
